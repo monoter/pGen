@@ -48,7 +48,6 @@ def checkMinGroups(groups_index_num):
     """
 
     groups_index = ""
-    zero_count = 0
    
     #Create a groups index string.Add zeros eventually.
     if groups_index_num < 100:
@@ -58,13 +57,9 @@ def checkMinGroups(groups_index_num):
     else :
         groups_index = str(groups_index_num)
     
-    #Count zeros in groups index
-    for i in groups_index:
-        if i == "0":
-            zero_count = zero_count+1 
-            
-    if zero_count >1:
-        return False
+    #If the number of zeros in the string is more than one
+    if groups_index.count("0") > 1:
+	 return False
 
     return True 
 
