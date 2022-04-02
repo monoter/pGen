@@ -65,7 +65,7 @@ def checkMinGroups(groups_index_num):
 
 
 print
-print("Generating a new strong password...")
+print("Generating strong password...")
 
 #Definition of variables
 #Character groups 
@@ -81,7 +81,7 @@ base_length = len(character_base)
 #Groups index number
 groups_index_num = 0;
 #Print variables; offset,quotation
-p_offset = "        "
+p_offset = 2*"\t"
 p_quotation = '"' 
 p_asterix = '*'
 
@@ -91,7 +91,7 @@ while checkMinGroups(groups_index_num)!= True :
    for i in range(10):
         new_random_number = random.randint(0,base_length-1)
         new_char = character_base[new_random_number]
-        password = password + new_char
+        password += new_char
    
         #Calculating the groups index number
         groups_index_num = groups_index_num + 1*int(checkGroup(new_char, lower_case))
