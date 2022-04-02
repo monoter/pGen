@@ -102,11 +102,11 @@ while checkMinGroups(groups_index_num)!= True :
 #Print section
 print
 print
-print(p_offset + p_offset + p_asterix +"New password is : " + p_quotation + password + p_quotation + p_offset + p_offset )
+print(2*p_offset + p_asterix +"New password is : " + p_quotation + password + p_quotation + 2*p_offset )
 print
 print
 print
-print(p_offset + p_offset + p_offset + p_offset + p_asterix + "surrounded by doublequotes" )
+print(4*p_offset + p_asterix + "surrounded by doublequotes" )
 print
 print
 
