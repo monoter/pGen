@@ -6,7 +6,7 @@ Security level requirements:
  o contain minimum three characters from different character groups.
 Character groups are uppercase, lowercase, digits and special characters.
 Credits:
-Orginaly written by MATBAL in Feb 2021, remastered Mar 2022 (edited in Vi).
+Orginaly written by MATBAL in Feb 2021, remastered Mar/Apr 2022 (edited in Vi & nano).
 """
 
 import random
@@ -60,12 +60,10 @@ def checkMinGroups(groups_index_num):
     #If the number of zeros in the string is more than one
     if groups_index.count("0") > 1:
 	 return False
-
     return True 
 
 
-print
-print("Generating strong password...")
+print("\nGenerating strong password...")
 
 #Definition of variables
 #Character groups 
@@ -84,6 +82,7 @@ groups_index_num = 0;
 p_offset = 2*"\t"
 p_quotation = '"' 
 p_asterix = '*'
+p_newline = '\n'
 
 while checkMinGroups(groups_index_num)!= True :
 
@@ -100,13 +99,8 @@ while checkMinGroups(groups_index_num)!= True :
         groups_index_num = groups_index_num + 1000*int(checkGroup(new_char, special_characters))
 
 #Print section
-print
-print
-print(2*p_offset + p_asterix +"New password is : " + p_quotation + password + p_quotation + 2*p_offset )
-print
-print
-print
-print(4*p_offset + p_asterix + "surrounded by doublequotes" )
-print
-print
+
+print(2*p_newline + 2*p_offset + p_asterix +"New password is : " + p_quotation + password + p_quotation)
+print(3*p_newline + 4*p_offset + p_asterix + "surrounded by doublequotes" + 2*p_newline )
+
 
