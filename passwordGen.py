@@ -6,100 +6,58 @@ Security level requirements:
  o contain minimum three characters from different character groups.
 Character groups are uppercase, lowercase, digits and special characters.
 Credits:
-Orginaly written by MATBAL in Feb 2021, remastered Mar/Apr 2022 (edited in Vi & nano).
+Orginaly written by MATBAL in Feb 2021, remastered Mar/Apr 2022 (edited mostly in Vi).
 """
 
+#random module 
 import random
 
-
-def checkGroup(new_char, group):
-    """
-    Purpose: 
-    Check if character is in the group. 
-    Parameters:
-    'new_char' is object with character data type.
-    'group'is an object with string data type. 
-    Principle:
-    Compare character by character in group string.
-    Returns:
-    True if character is in the group string.
-    False if character is not in the group string.
-    """
-
-    for char in group:
-        if new_char == char:
-            return True
-    return False
-        
-def checkMinGroups(groups_index_num):
-    """
-    Purpose:
-    Check if the index indicates three different groups. 
-    Parameters:
-    'groups_index_num' has an integer data type.
-    Principle:
-    Create a groups index string based on groups index number.
-    Eventually add zeros at the beginning to have four character length string.
-    Count zeros in the index string.
-    Zero indicates that password's characters has not representation in characters group.
-    As we have four groups of characters, more than one zero means False return.
-    Returns:
-    True if were indicated minimum three different groups, False in other cases.
-    """
-
-    groups_index = ""
-   
-    #Create a groups index string.Add zeros eventually.
-    if groups_index_num < 100:
-        groups_index = "00" + str(groups_index_num)
-    elif groups_index_num < 1000:
-        groups_index = "0" + str(groups_index_num)
-    else :
-        groups_index = str(groups_index_num)
-    
-    #If the number of zeros in the string is more than one
-    if groups_index.count("0") > 1:
-	 return False
-    return True 
-
-
+#stdout intro
 print("\nGenerating strong password...")
 
 #Definition of variables
+
 #Character groups 
 lower_case = "abcdefghijklmnopqrstuvwxyz"
-upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+upper_case = lower_case.upper()
 digits = "0123456789"
-special_characters = "+-*/,.?!@#$%^&_= "
+spec_chars = "+-*/,.?!@#$%^&_= "
+
 #Password string
 password = ""
 #All characters
-character_base = lower_case + upper_case + digits + special_characters 
-base_length = len(character_base)
-#Groups index number
-groups_index_num = 0;
-#Print variables; offset,quotation
+character_base = lower_case + upper_case + digits + spec_chars
+
+#Groups flags
+groups_flags=[
+[False,lower_case],
+[False,upper_case],
+[False,digits],
+[False,spec_chars],
+]
+
+
+#Print variables; offset,quotation, etc.
 p_offset = 2*"\t"
 p_quotation = '"' 
 p_asterix = '*'
 p_newline = '\n'
 
-while checkMinGroups(groups_index_num)!= True :
+# Loop untill new password has characters from minimum three groups
+while [groups_flags[0][0], groups_flags[1][0], groups_flags[2][0], groups_flags[3][0]].count(True) < 3 :
 
    #Generate ten characters 
    for i in range(10):
-        new_random_number = random.randint(0,base_length-1)
-        new_char = character_base[new_random_number]
+        new_random_number = random.randint(0,len(character_base)-1)
+        new_char = str(character_base)[new_random_number]
         password += new_char
-   
-        #Calculating the groups index number
-        groups_index_num = groups_index_num + 1*int(checkGroup(new_char, lower_case))
-        groups_index_num = groups_index_num + 10*int(checkGroup(new_char, upper_case))
-        groups_index_num = groups_index_num + 100*int(checkGroup(new_char, digits))
-        groups_index_num = groups_index_num + 1000*int(checkGroup(new_char, special_characters))
+
+	#Groups flags setting
+	for n in range(len(groups_flags)):
+		if new_char in groups_flags[n][1] :
+			 groups_flags[n][0] = True
 
 #Print section
-
 print(2*p_newline + 2*p_offset + p_asterix +"New password is : " + p_quotation + password + p_quotation)
 print(3*p_newline + 4*p_offset + p_asterix + "surrounded by doublequotes" + 2*p_newline )
 
